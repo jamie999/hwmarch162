@@ -11,21 +11,24 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad
+- (void)viewWillLayoutSubviews
 {
-    [super viewDidLoad];
+    [super viewWillLayoutSubviews];
 
     // Configure the view.
     SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    if (!skView.scene) {
     
-    // Create and configure the scene.
-    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+        skView.showsFPS = YES;
+        skView.showsNodeCount = YES;
     
-    // Present the scene.
-    [skView presentScene:scene];
+        // Create and configure the scene.
+        SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+        // Present the scene.
+        [skView presentScene:scene];
+        }
 }
 
 - (BOOL)shouldAutorotate
@@ -46,6 +49,10 @@
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
+}
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 @end
